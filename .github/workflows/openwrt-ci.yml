@@ -83,7 +83,7 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=n
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           CONFIG_PACKAGE_luci-app-upnp=y
@@ -91,7 +91,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-filetransfer=y
           CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=y
-          CONFIG_PACKAGE_luci-app-samba4=y
+          CONFIG_PACKAGE_luci-app-samba4=n
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-ntpc=y
           EOF

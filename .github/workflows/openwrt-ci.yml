@@ -81,6 +81,10 @@ jobs:
 
           # 常用LuCI插件选择:
           cat >> .config <<EOF
+          CONFIG_PACKAGE_luci-app-accesscontrol=n
+          CONFIG_PACKAGE_luci-app-vsftpd=n
+          CONFIG_PACKAGE_luci-app-wol=n
+          CONFIG_PACKAGE_luci-app-zerotier=n
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=n
@@ -91,9 +95,13 @@ jobs:
           CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-filetransfer=y
           CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=y
-          CONFIG_PACKAGE_luci-app-samba4=n
+          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-ntpc=y
+          CONFIG_PACKAGE_luci-app-mtwifi=y
+          CONFIG_PACKAGE_luci-app-flowoffload=y
+          CONFIG_PACKAGE_luci-app-frpc=y
+          CONFIG_PACKAGE_luci-app-nlbwmon=y
           EOF
 
           

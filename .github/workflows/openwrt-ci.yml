@@ -97,11 +97,11 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=y
-          CONFIG_PACKAGE_luci-app-samba=y
+          CONFIG_PACKAGE_luci-app-samba=n
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-ntpc=y
           CONFIG_PACKAGE_luci-app-mtwifi=y
-          CONFIG_PACKAGE_luci-app-nlbwmon=y
+          CONFIG_PACKAGE_luci-app-nlbwmon=n
           EOF
 
           

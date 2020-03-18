@@ -61,12 +61,10 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-
       - name: Costom configure file
         run: |
           rm -f ./.config*
           touch ./.config
-
           #
           # ========================固件定制部分========================
           
@@ -76,28 +74,26 @@ jobs:
           CONFIG_TARGET_ramips_mt7620=y
           CONFIG_TARGET_ramips_mt7620_DEVICE_hiwifi_hc5861=y
           EOF
-          
           # 常用LuCI插件选择:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=n
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-filetransfer=y
           CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=y
+          CONFIG_PACKAGE_luci-app-samba4=n
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-ntpc=y
-          CONFIG_PACKAGE_luci-app-accesscontrol=n
-          CONFIG_PACKAGE_luci-app-vsftpd=n
-          CONFIG_PACKAGE_luci-app-wol=n
-          CONFIG_PACKAGE_luci-app-zerotier=n
+          CONFIG_PACKAGE_luci-app-mtwifi=y
+          # CONFIG_PACKAGE_luci-app-accesscontrol=n
+          # CONFIG_PACKAGE_luci-app-vsftpd=n
+          # CONFIG_PACKAGE_luci-app-wol=n
+          # CONFIG_PACKAGE_luci-app-zerotier=n
           EOF
           
           # 常用软件包:
@@ -117,34 +113,27 @@ jobs:
           
           EOF
           
-
           # ========================固件定制部分结束========================
           # 
-
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-
       - name: Make download
         run: |
           make download -j8
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
-
       - name: Compile firmware
         run: |
           echo -e "$(nproc) thread build."
           make -j$(nproc) V=s
-
       - name: Assemble artifact
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./artifact/
           find ./bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./artifact/
-
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
           name: OpenWrt firmware
           path: ./artifact/
-
